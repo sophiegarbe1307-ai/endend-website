@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Home & Lifestyle Shop</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --cream: #F7F3EE;
+      --sand: #E8DDD1;
+      --clay: #C4A882;
+      --bark: #7A5C3E;
+      --ink: #1E1A17;
+      --muted: #8C7D70;
+      --white: #FFFFFF;
+      --radius: 4px;
+    }
+
+    body {
+      background: var(--cream);
+      color: var(--ink);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      min-height: 100vh;
+    }
+
+    /* ── Header ── */
+    header {
+      border-bottom: 1px solid var(--sand);
+      padding: 0 2.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 72px;
+      background: var(--white);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    .logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem;
+      font-weight: 400;
+      letter-spacing: 0.08em;
+      color: var(--ink);
+      text-decoration: none;
+    }
+
+    .logo span { color: var(--clay); }
+
+    nav { display: flex; gap: 2rem; align-items: center; }
+
+    nav a {
+      font-size: 0.8rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    nav a:hover { color: var(--ink); }
+
+    .cart-btn {
+      font-size: 0.8rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      background: var(--ink);
+      color: var(--white);
+      border: none;
+      padding: 9px 20px;
+      border-radius: var(--radius);
+      cursor: pointer;
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 400;
+      transition: background 0.2s;
+    }
+
+    .cart-btn:hover { background: var(--bark); }
+
+    /* ── Hero banner ── */
+    .hero {
+      padding: 4rem 2.5rem 2.5rem;
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 2rem;
+    }
+
+    .hero-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.8rem, 6vw, 4.5rem);
+      font-weight: 300;
+      line-height: 1.05;
+      letter-spacing: -0.01em;
+      color: var(--ink);
+      max-width: 560px;
+    }
+
+    .hero-title em { font-style: italic; color: var(--clay); }
+
+    .hero-meta { text-align: right; }
+
+    .hero-meta p {
+      font-size: 0.82rem;
+      color: var(--muted);
+      letter-spacing: 0.06em;
+      line-height: 1.8;
+    }
+
+    /* ── Filter bar ── */
+    .filter-bar {
+      padding: 0 2.5rem 2rem;
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .filter-btn {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 6px 16px;
+      border-radius: 100px;
+      border: 1px solid var(--sand);
+      background: transparent;
+      color: var(--muted);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .filter-btn:hover, .filter-btn.active {
+      background: var(--ink);
+      border-color: var(--ink);
+      color: var(--white);
+    }
+
+    /* ── Grid ── */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 1px;
+      background: var(--sand);
+      border-top: 1px solid var(--sand);
+    }
+
+    /* ── Product card ── */
+    .card {
+      background: var(--white);
+      display: flex;
+      flex-direction: column;
+      cursor: pointer;
+      transition: background 0.2s;
+      animation: fadeUp 0.5s ease both;
+    }
+
+    .card:hover { background: var(--cream); }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(12px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .card:nth-child(1) { animation-delay: 0.05s; }
+    .card:nth-child(2) { animation-delay: 0.10s; }
+    .card:nth-child(3) { animation-delay: 0.15s; }
+    .card:nth-child(4) { animation-delay: 0.20s; }
+    .card:nth-child(5) { animation-delay: 0.25s; }
+    .card:nth-child(6) { animation-delay: 0.30s; }
+    .card:nth-child(7) { animation-delay: 0.35s; }
+    .card:nth-child(8) { animation-delay: 0.40s; }
+
+    .card-img {
+      width: 100%;
+      aspect-ratio: 4/3;
+      background: var(--cream);
+      border-bottom: 1px solid var(--sand);
+      overflow: hidden;
+    }
+
+    .card-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.4s ease;
+    }
+
+    .card:hover .card-img img { transform: scale(1.04); }
+
+    .card-body {
+      padding: 1.1rem 1.25rem 1.25rem;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+      gap: 4px;
+    }
+
+    .card-tag {
+      font-size: 0.68rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--clay);
+      font-weight: 500;
+    }
+
+    .card-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.15rem;
+      font-weight: 400;
+      color: var(--ink);
+      line-height: 1.3;
+    }
+
+    .card-desc {
+      font-size: 0.78rem;
+      color: var(--muted);
+      line-height: 1.6;
+      margin-top: 2px;
+      flex: 1;
+    }
+
+    .card-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 14px;
+    }
+
+    .card-price {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.25rem;
+      font-weight: 400;
+      color: var(--ink);
+    }
+
+    .add-btn {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 7px 14px;
+      border-radius: var(--radius);
+      border: 1px solid var(--ink);
+      background: transparent;
+      color: var(--ink);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .add-btn:hover { background: var(--ink); color: var(--white); }
+
+    .add-btn.added {
+      background: var(--bark);
+      border-color: var(--bark);
+      color: var(--white);
+    }
+
+    /* ── Footer ── */
+    footer {
+      padding: 2.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px solid var(--sand);
+      margin-top: 1px;
+    }
+
+    footer p {
+      font-size: 0.78rem;
+      color: var(--muted);
+      letter-spacing: 0.06em;
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 600px) {
+      header { padding: 0 1.25rem; }
+      nav { display: none; }
+      .hero { padding: 2rem 1.25rem 1.5rem; flex-direction: column; align-items: flex-start; }
+      .hero-meta { text-align: left; }
+      .filter-bar { padding: 0 1.25rem 1.5rem; }
+      footer { padding: 1.5rem 1.25rem; flex-direction: column; gap: 0.5rem; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <a class="logo" href="#">Maison<span>.</span></a>
+    <nav>
+      <a href="#">Shop</a>
+      <a href="#">Collections</a>
+      <a href="#">About</a>
+    </nav>
+    <button class="cart-btn">Cart (0)</button>
+  </header>
+
+  <section class="hero">
+    <h1 class="hero-title">Pieces for<br><em>living well.</em></h1>
+    <div class="hero-meta">
+      <p>Thoughtfully designed<br>for everyday life.<br>Free shipping over $80.</p>
+    </div>
+  </section>
+
+  <div class="filter-bar" id="filters"></div>
+
+  <main class="grid" id="grid" role="list" aria-label="Products"></main>
+
+  <footer>
+    <p>© 2026 Maison. All rights reserved.</p>
+    <p>Designed with care &mdash; made to last.</p>
+  </footer>
+
+  <script>
+    const SHEET_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vT4K_I0vqKeuznpPiEUIOgBwVQrcKjyvJue9KTWNKblthpHFVoEAekLUEyA3RtWvTKvRfKCegq0XAL4/pub?output=csv";
+
+    let products = [];
+    let cartCount = 0;
+    let activeTag = "All";
+
+    const filtersEl = document.getElementById("filters");
+    const gridEl   = document.getElementById("grid");
+    const cartBtn  = document.querySelector(".cart-btn");
+
+    /* ── CSV parser (handles quoted fields with commas/newlines) ── */
+    function parseCSV(text) {
+      const rows = [];
+      let row = [], field = "", inQuotes = false;
+      for (let i = 0; i < text.length; i++) {
+        const ch = text[i], next = text[i + 1];
+        if (inQuotes) {
+          if (ch === '"' && next === '"') { field += '"'; i++; }
+          else if (ch === '"')            { inQuotes = false; }
+          else                            { field += ch; }
+        } else {
+          if      (ch === '"')  { inQuotes = true; }
+          else if (ch === ',')  { row.push(field); field = ""; }
+          else if (ch === '\n' || (ch === '\r' && next === '\n')) {
+            if (ch === '\r') i++;
+            row.push(field); field = "";
+            rows.push(row); row = [];
+          } else { field += ch; }
+        }
+      }
+      if (field || row.length) { row.push(field); rows.push(row); }
+      return rows;
+    }
+
+    /* ── Map CSV rows → product objects using header names ── */
+    function csvToProducts(rows) {
+      if (rows.length < 2) return [];
+      const headers = rows[0].map(h => h.trim().toLowerCase());
+      const col = key => headers.indexOf(key);
+      const iId    = col("id"),
+            iImg   = col("img"),
+            iTag   = col("tag"),
+            iName  = col("name"),
+            iDesc  = col("desc"),
+            iPrice = col("price");
+      return rows.slice(1)
+        .filter(r => r.some(c => c.trim()))
+        .map((r, i) => ({
+          id:    iId    !== -1 ? ((r[iId]    || "").trim() || (i + 1)) : (i + 1),
+          img:   iImg   !== -1 ?  (r[iImg]   || "").trim() : "",
+          tag:   iTag   !== -1 ?  (r[iTag]   || "").trim() : "",
+          name:  iName  !== -1 ?  (r[iName]  || "").trim() : "",
+          desc:  iDesc  !== -1 ?  (r[iDesc]  || "").trim() : "",
+          price: iPrice !== -1 ?  (r[iPrice] || "").trim() : "",
+        }))
+        .filter(p => p.name);
+    }
+
+    /* ── Loading / error states ── */
+    function showLoading() {
+      gridEl.innerHTML = `<div style="grid-column:1/-1;padding:4rem 2.5rem;color:var(--muted);font-size:.85rem;letter-spacing:.08em;">Loading products…</div>`;
+    }
+
+    function showError(msg) {
+      gridEl.innerHTML = `<div style="grid-column:1/-1;padding:4rem 2.5rem;color:var(--clay);font-size:.85rem;letter-spacing:.06em;">${msg}</div>`;
+    }
+
+    /* ── Render ── */
+    function renderFilters() {
+      const tags = ["All", ...new Set(products.map(p => p.tag).filter(Boolean))];
+      filtersEl.innerHTML = tags.map(t =>
+        `<button class="filter-btn${t === activeTag ? " active" : ""}" data-tag="${t}">${t}</button>`
+      ).join("");
+      filtersEl.querySelectorAll(".filter-btn").forEach(btn =>
+        btn.addEventListener("click", () => {
+          activeTag = btn.dataset.tag;
+          renderFilters();
+          renderGrid();
+        })
+      );
+    }
+
+    function renderGrid() {
+      const visible = activeTag === "All" ? products : products.filter(p => p.tag === activeTag);
+      if (!visible.length) {
+        gridEl.innerHTML = `<div style="grid-column:1/-1;padding:4rem 2.5rem;color:var(--muted);font-size:.85rem;">No products found.</div>`;
+        return;
+      }
+      gridEl.innerHTML = visible.map(p => `
+        <article class="card" role="listitem">
+          <div class="card-img">
+            ${p.img ? `<img src="${p.img}" alt="${p.name}" loading="lazy" />` : ""}
+          </div>
+          <div class="card-body">
+            <span class="card-tag">${p.tag}</span>
+            <h2 class="card-name">${p.name}</h2>
+            <p class="card-desc">${p.desc}</p>
+            <div class="card-footer">
+              <span class="card-price">${p.price}</span>
+              <button class="add-btn" data-id="${p.id}">Add to cart</button>
+            </div>
+          </div>
+        </article>`).join("");
+
+      gridEl.querySelectorAll(".add-btn").forEach(btn =>
+        btn.addEventListener("click", (e) => {
+          e.stopPropagation();
+          cartCount++;
+          cartBtn.textContent = `Cart (${cartCount})`;
+          btn.textContent = "Added ✓";
+          btn.classList.add("added");
+          setTimeout(() => { btn.textContent = "Add to cart"; btn.classList.remove("added"); }, 1800);
+        })
+      );
+    }
+
+    /* ── Bootstrap: fetch CSV then render ── */
+    async function init() {
+      showLoading();
+      try {
+        const res = await fetch(SHEET_CSV_URL);
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const text = await res.text();
+        const rows = parseCSV(text);
+        products = csvToProducts(rows);
+        if (!products.length) throw new Error("No products found in sheet.");
+        renderFilters();
+        renderGrid();
+      } catch (err) {
+        showError(`Could not load products. ${err.message}`);
+        console.error(err);
+      }
+    }
+
+    init();
+  </script>
+</body>
+</html>
